@@ -1,4 +1,4 @@
-# FAST Subdomain Finder
+# Torified Subdomain Finder
 
 ## Installation
 
@@ -30,14 +30,20 @@ composer install
 ### Usage 
 
 Prepare the subdomains.txt list. Add your own subdomains to the list or use your own personal list.
-Inside of the public folder run
+Inside of the public folder run, Also make sure tor service is running and started.
 ```
+sudo systemctl start tor
+sudo systemctl enable tor
+
 php core.php websitename.com subdomains.txt
 ```
 
 ### Example
 
 ```
+sudo systemctl start tor
+sudo systemctl enable tor
+
 php core.php youtube.com subdomains.txt
 ```
 

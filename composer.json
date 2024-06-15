@@ -1,0 +1,11 @@
+{
+    "name": "betty/project",
+    "autoload": {
+        "psr-4": {
+            "Betty\\Project\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    }
+}

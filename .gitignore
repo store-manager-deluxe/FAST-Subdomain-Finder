@@ -3,3 +3,8 @@
 /.vscode
 /node_modules
 /.env
+/vendor
+/.idea
+/.vscode
+/node_modules
+/.env

@@ -11,20 +11,21 @@ sudo apt install php php-curl php-cli php-mysql php-xml php-mbstring php-zip php
 ```
 
 ### Step 2 Clone the Repository
-
+```
 git clone https://github.com/store-manager-deluxe/FAST-Subdomain-Finder.git
 cd FAST-Subdomain-Finder
-
+```
 ### Step 3 Install COmposer
-
+```
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
-
+```
 
 ### Step 4 Install Project Dependencies
 
+```
 composer install
-
+```
 
 ### Usage 
 

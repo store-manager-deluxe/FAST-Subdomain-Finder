@@ -12,8 +12,8 @@ sudo apt install php php-curl php-cli php-mysql php-xml php-mbstring php-zip php
 
 ### Step 2 Clone the Repository
 ```
-git clone https://github.com/store-manager-deluxe/FAST-Subdomain-Finder.git
-cd FAST-Subdomain-Finder
+git clone https://github.com/store-manager-deluxe/Torified-Subdomain-Finder.git
+cd Torified-Subdomain-Finder
 ```
 ### Step 3 Install COmposer
 ```

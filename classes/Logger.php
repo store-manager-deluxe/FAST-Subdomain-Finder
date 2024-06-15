@@ -32,19 +32,20 @@ class Logger {
         'underline_white' => "\033[4;37m",
     ];
 
+    private static function futuristicText($text, $color)
+    {
+        return $color . $text . self::$colors['reset'];
+    }
+
     public static function log($message)
     {
         $time = date('[H:i:s]');
-        echo self::$colors['bold_green'] . $time . self::$colors['reset'] . ": $message\n";
-         
+        echo self::$colors['bold_cyan'] . $time . self::$colors['reset'] . ": " . self::futuristicText($message, self::$colors['bold_green']) . "\n";
     }
 
     public static function errorLog($message)
     {
         $time = date('[H:i:s]');
-        echo self::$colors['bold_red'] . $time . self::$colors['reset'] . ": $message\n";
-         
+        echo self::$colors['bold_cyan'] . $time . self::$colors['reset'] . ": " . self::futuristicText($message, self::$colors['bold_red']) . "\n";
     }
-    
-
 }

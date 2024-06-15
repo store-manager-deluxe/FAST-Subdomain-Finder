@@ -2,13 +2,13 @@
 
 namespace Classes;
 
-use Classes\Logger;
+use classes\Logger;
 use GuzzleHttp\Client;
-use Classes\Filex;
+use classes\Filex;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
-use Classes\Masking\Headers;
+use classes\Masking\Headers;
 
 class Subdomain {
 
@@ -20,9 +20,9 @@ class Subdomain {
     {
         $userAgent = $header->randomAgent(function() {
             $url = 'https://gist.githubusercontent.com/pzb/b4b6f57144aea7827ae4/raw/cf847b76a142955b1410c8bcef3aabe221a63db1/user-agents.txt';
-            $content = @file_get_contents($url); // Use @ to suppress warnings
+            $content = @file_get_contents($url);  
             if ($content === false) {
-                return []; // Return an empty array if the URL cannot be fetched
+                return [];  
             }
             return array_filter(array_map('trim', explode("\n", $content)));
         });
@@ -58,7 +58,7 @@ class Subdomain {
 
     public function testSubdomains($domain, $subdomainList)
     {
-        Logger::log("NOTICE! Results will be stored as {$this->validSubdomainsFile}");
+        Logger::log(">>> NOTICE! Results will be stored in: {$this->validSubdomainsFile} <<<");
 
         file_put_contents($this->validSubdomainsFile, '');
 
@@ -71,21 +71,21 @@ class Subdomain {
                 $subdomain = $subdomainList[$i + $j];
                 $currentUrl = "https://{$subdomain}.{$domain}";
                 $proxy = $this->logProxy();
-                Logger::log("[SOCKET] [ {$proxy} ]><>[TORIFIED SOCKET]><> [REQ] Subdomain : {$currentUrl}");
+                Logger::log("[*] Proxy  = [ {$proxy} ]  Subdomain : {$currentUrl}");
 
                 $promises[$currentUrl] = $this->client->requestAsync('GET', $currentUrl, ['timeout' => 10])
                     ->then(
                         function (ResponseInterface $res) use ($currentUrl) {
                             if ($res->getStatusCode() == 200) {
-                                Logger::log("Subdomain {$currentUrl} is valid and has content.");
+                                Logger::log("[+] Subdomain {$currentUrl} is valid and has content.");
                                 file_put_contents($this->validSubdomainsFile, "{$currentUrl}\n", FILE_APPEND);
                                 return true;
                             }
-                            Logger::log("Subdomain {$currentUrl} returned status code {$res->getStatusCode()}.");
+                            Logger::log("[-] Subdomain {$currentUrl} returned status code {$res->getStatusCode()}.");
                             return false;
                         },
                         function (RequestException $e) use ($currentUrl) {
-                            Logger::errorLog("Subdomain {$currentUrl} is not valid or unreachable.");
+                            Logger::errorLog("[-] Subdomain {$currentUrl} is not valid or unreachable.");
                             return false;
                         }
                     );
@@ -95,15 +95,15 @@ class Subdomain {
 
             foreach ($results as $currentUrl => $result) {
                 if ($result['state'] === 'fulfilled' && $result['value']) {
-                    Logger::log("SUCCESS: subdomain {$currentUrl} is valid.");
+                    Logger::log("[+] SUCCESS: Subdomain {$currentUrl} is valid.");
                 } else {
-                    Logger::errorLog("ERROR: Subdomain {$currentUrl} is not valid.");
+                    Logger::errorLog("[-] ERROR: Subdomain {$currentUrl} is not valid.");
                 }
             }
         }
     }
 
-    public function logProxy():string  
+    public function logProxy(): string
     {
         $response = $this->client->request('GET', 'https://icanhazip.com');
         $proxyIp = trim($response->getBody()->getContents());

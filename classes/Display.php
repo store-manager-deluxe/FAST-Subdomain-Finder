@@ -28,11 +28,9 @@ class Display {
             foreach(str_split($output) as $characters) 
             {
                 echo $characters;
-                usleep(1200);
+                usleep(5000);
             }
-
             echo "\n";
-        }
-        
+        }  
     }
 }

@@ -2,9 +2,9 @@
 
 namespace classes;
 
-class Sanatize {
+class Sanitize {
 
-    public static function sanatizeUrl($domain) {
+    public static function sanitizeUrl($domain) {
         return str_replace([
             'http://', 
             'https://',

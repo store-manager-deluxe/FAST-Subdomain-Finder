@@ -20,9 +20,9 @@ class Subdomain {
     {
         $userAgent = $header->randomAgent(function() {
             $url = 'https://gist.githubusercontent.com/pzb/b4b6f57144aea7827ae4/raw/cf847b76a142955b1410c8bcef3aabe221a63db1/user-agents.txt';
-            $content = @file_get_contents($url);  
+            $content = @file_get_contents($url); // Use @ to suppress warnings
             if ($content === false) {
-                return [];  
+                return []; // Return an empty array if the URL cannot be fetched
             }
             return array_filter(array_map('trim', explode("\n", $content)));
         });

@@ -36,15 +36,15 @@ class Logger {
     {
         $time = date('[H:i:s]');
         echo self::$colors['bold_green'] . $time . self::$colors['reset'] . ": $message\n";
-        usleep(100);
+         
     }
 
     public static function errorLog($message)
     {
         $time = date('[H:i:s]');
         echo self::$colors['bold_red'] . $time . self::$colors['reset'] . ": $message\n";
-        usleep(100);
+         
     }
-
+    
 
 }
